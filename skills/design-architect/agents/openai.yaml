@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design Architect"
+  short_description: "Pick UI directions and design tickets."
+  default_prompt: "Use $design-architect to shortlist three UI styles, mock them up quickly, and turn the selected direction into design tickets."
+
+policy:
+  allow_implicit_invocation: true
