@@ -11,6 +11,15 @@ Default behavior: verify in the browser, not just by reading code or trusting sc
 
 If the app is not already running, start or reuse the local dev server first. If the relevant route is unknown, identify it from the codebase before opening the browser.
 
+## Standard Viewports
+
+Use these default viewports unless the product clearly requires a different target:
+
+- `Desktop`: `1440x900`
+- `Mobile`: `390x844`
+
+If you use different viewports, say why in the final report.
+
 ## Core Principle
 
 Agents should treat visual QA as part of implementation, not as optional follow-up.
@@ -39,7 +48,9 @@ Do not use this skill for backend-only work with no user-visible surface.
 
 1. **Identify the changed surface**
    - Determine which page, route, component, modal, or flow was changed.
+   - Identify the exact affected route or component from the code diff first.
    - Prefer checking the exact affected surface instead of browsing randomly.
+   - If the changed route cannot be determined from code, say that and explain how you selected the page to inspect.
 
 2. **Open the app with Playwright**
    - Use Playwright or an equivalent browser automation tool to load the local or deployed page.
@@ -69,12 +80,25 @@ Do not use this skill for backend-only work with no user-visible surface.
    - Validate that new components feel consistent with the surrounding product unless the task intentionally changes the visual system.
 
 7. **Capture evidence**
-   - Save screenshots when useful for review or comparison.
-   - Prefer before/after or desktop/mobile captures when they clarify the result.
+   - For visual changes, capture evidence by default:
+     - one desktop screenshot
+     - one mobile screenshot
+   - If animation or motion behavior is being validated, optionally capture a short video clip in addition to screenshots.
+   - Note any environment limitation that prevents evidence capture.
 
 8. **Fix and re-check**
    - If issues are found, fix them and repeat the browser QA loop.
    - Do not report success based only on code inspection after a visual bug was discovered.
+
+9. **Test realistic content**
+   - Do not rely only on ideal placeholder states.
+   - Check for obvious breakage with realistic or stressful content such as:
+     - long labels
+     - empty values
+     - large numbers
+     - multiple chips, filters, or tags
+     - dense tables or long row values
+   - If realistic data is unavailable, state that limitation in the report.
 
 ## QA Checklist
 
@@ -89,10 +113,32 @@ Use the checklist in [references/qa-checklist.md](references/qa-checklist.md) du
 - empty, loading, and error states when relevant
 - console or runtime issues
 
+## Required Checks
+
+Do not finish frontend QA without completing all of these:
+
+- identify the changed route or component from the code when possible
+- check the changed surface on desktop
+- check the changed surface on mobile
+- exercise the changed interaction or changed visual state
+- review the browser for obvious console or runtime problems
+- capture desktop and mobile screenshot evidence for visual changes unless blocked by the environment
+
+## Failure Conditions
+
+Do not report success if any of the following are true:
+
+- desktop was not checked
+- mobile was not checked
+- the changed interaction or changed state was not exercised
+- console or runtime errors were observed and left unexplained
+- required screenshot evidence for a visual change was not captured and no limitation was stated
+
 ## Output Guidance
 
 When reporting results, use this structure:
 
+- `Status`
 - `Surface checked`
 - `What was verified`
 - `Issues found`
@@ -101,6 +147,12 @@ When reporting results, use this structure:
 - `Residual risk`
 
 If no issues are found, say that explicitly and mention what was actually checked. Do not claim broad QA coverage if only one screen was opened.
+
+Use `Status` as one of:
+
+- `pass`
+- `pass with minor issues`
+- `fail`
 
 ## Standards
 
@@ -122,6 +174,8 @@ Good behavior:
 3. always check both desktop and mobile
 4. exercise the filter interaction
 5. inspect hover/focus and loading states
-6. note any layout or console problems
-7. fix issues if present
-8. report what was verified with screenshot evidence if useful
+6. capture desktop and mobile screenshots
+7. capture a short video clip too if motion or animation changed
+8. note any layout or console problems
+9. fix issues if present
+10. report status, what was verified, and screenshot evidence
