@@ -52,10 +52,10 @@ Do not use this skill for backend-only work with no user-visible surface.
    - Confirm the intended user action still works.
 
 4. **Run breakpoint checks**
-   - Check at least:
+   - Always check both:
      - desktop
-     - tablet if relevant
      - mobile
+   - Check tablet too when the surface is complex or clearly used at intermediate widths.
    - Focus on clipping, overflow, wrapping, cramped spacing, collapsed hierarchy, and unusable controls.
 
 5. **Run interaction and state checks**
@@ -82,6 +82,8 @@ Use the checklist in [references/qa-checklist.md](references/qa-checklist.md) du
 
 - layout and alignment
 - spacing and hierarchy
+- desktop rendering
+- mobile rendering
 - responsiveness
 - changed interaction behavior
 - empty, loading, and error states when relevant
@@ -117,7 +119,7 @@ Good behavior:
 
 1. identify the dashboard route
 2. open it with Playwright
-3. check desktop and mobile
+3. always check both desktop and mobile
 4. exercise the filter interaction
 5. inspect hover/focus and loading states
 6. note any layout or console problems

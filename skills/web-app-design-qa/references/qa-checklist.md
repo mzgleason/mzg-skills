@@ -11,8 +11,8 @@ Use this checklist when reviewing frontend changes in the browser.
 
 ## 2. Responsiveness
 
-- Does the layout still work on desktop?
-- Does it still work on mobile?
+- Always verify the layout on desktop.
+- Always verify the layout on mobile.
 - If the surface is complex, does it still work on tablet?
 - Do text, buttons, tables, and filters wrap or collapse cleanly?
 
