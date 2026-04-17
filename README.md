@@ -12,6 +12,7 @@ This repo is intentionally simple:
 ## Skills
 
 - `design-architect` - shortlist UI directions, create visual comparisons, and optionally generate follow-up design tickets
+- `web-app-design-qa` - use Playwright to actively verify frontend changes in a browser before declaring UI work done
 
 ## Usage
 

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Web App Design QA"
+  short_description: "Check frontend changes with Playwright."
+  default_prompt: "Use $web-app-design-qa to verify my frontend changes in a browser with Playwright before declaring them done."
+
+policy:
+  allow_implicit_invocation: true
